@@ -130,9 +130,9 @@ func viewRun(opts *ViewOptions) error {
 		return opts.Exporter.Write(opts.IO, issue)
 	}
 
-	if opts.IO.IsStdoutTTY() {
-		return printHumanIssuePreview(opts, issue)
-	}
+	//if opts.IO.IsStdoutTTY() {
+	//	return printHumanIssuePreview(opts, issue)
+	//}
 
 	if opts.Comments {
 		fmt.Fprint(opts.IO.Out, prShared.RawCommentList(issue.Comments, api.PullRequestReviews{}))
@@ -161,6 +161,7 @@ func findIssue(client *http.Client, baseRepoFn func() (ghrepo.Interface, error),
 }
 
 func printRawIssuePreview(out io.Writer, issue *api.Issue) error {
+	/* 
 	assignees := issueAssigneeList(*issue)
 	labels := issueLabelList(issue, nil)
 	projects := issueProjectList(*issue)
@@ -181,6 +182,7 @@ func printRawIssuePreview(out io.Writer, issue *api.Issue) error {
 	fmt.Fprintf(out, "milestone:\t%s\n", milestoneTitle)
 	fmt.Fprintf(out, "number:\t%d\n", issue.Number)
 	fmt.Fprintln(out, "--")
+	*/
 	fmt.Fprintln(out, issue.Body)
 	return nil
 }
